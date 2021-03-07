@@ -2,7 +2,7 @@
 
 #### 学前班问题汇总：
 
-##### Q: GitHub 是什么？
+##### GitHub 是什么？
 
 ###### 概念：
 
@@ -34,7 +34,7 @@ GitHub通常用于软件开发。GitHub还支持以下格式和功能：
 - 预览3D渲染文件。预览功能通过WebGL和Three.js实现。
 - 预览Adobe Photoshop的PSD文件，甚至可以比较同一文件的不同版本。
 
-##### Q: git 是什么？
+##### Q: Git 是什么？
 
 ###### 概念
 
@@ -96,18 +96,164 @@ Git数据库中不变引用的对象将会被垃圾回收清除。Git命令可�
 
 某些操作（例如，将提交推送到远程存储库，存储太多对象或手动运行Git的垃圾收集命令）可能会导致Git将对象重新打包为打包文件，在打包过程中，采用反向差异并进行压缩以消除多余的内容并减小尺寸。该过程将生成包含对象内容的.pack文件，每个文件都有一个对应的.idx索引文件，其中包含对打包对象及其在打包文件中位置的引用。当将分支推送到远程存储库或从远程存储库拉出分支时，这些打包文件将通过网络传输。提取或获取分支时，将打包文件解压缩以在对象存储库中创建松散对象。
 
-Q: git clone 作用？参数 作用
-Q: git commit 作用？
-Q: git push 作用？
-Q: git pull 作用？--rebase
+##### 常用Git命令汇总
+
+![img](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
+
+1.添加指定文件到暂存区           																			   git add [file1] [file2] ...
+
+2.添加指定目录到暂存区，包括子目录																   git add [dir]
+
+3.添加当前目录的所有文件到暂存区																	   git add .
+
+4.对于同一个文件的多处变化，可以实现分次提交										        git add -p
+
+5.增加一个新的远程仓库，并命名
+git remote add [shortname] [url]
+
+6.提交暂存区到仓库区
+git commit -m [message]
+
+7.提交暂存区的指定文件到仓库区
+git commit [file1] [file2] ... -m [message]
+
+8.提交工作区自上次commit之后的变化，直接到仓库区
+git commit -a
+
+9.提交时显示所有diff信息
+git commit -v
+
+10.使用一次新的commit，替代上一次提交  															      如果代码没有任何新变化，则用来改写上一次commit的提交信息
+git commit --amend -m [message]
+
+11.重做上一次commit，并包括指定文件的新变化
+git commit --amend [file1] [file2] ...
+
+**git push的一般形式为 git push <远程主机名> <本地分支名>  <远程分支名> ，例如 git push origin master：refs/for/master ，即是将本地的master分支推送到远程主机origin上的对应master分支， origin 是远程主机名，第一个master是本地分支名，第二个master是远程分支名。**
+
+12.推送所有分支到远程仓库
+git push [remote] --all
+
+13.上传本地指定分支到远程仓库
+git push [remote] [branch]
+
+14.强行推送当前分支到远程仓库，即使有冲突
+git push [remote] --force
+
+**git pull命令的作用是：取回远程主机某个分支的更新，再与本地的指定分支合并。基本用法：git pull <远程主机名> <远程分支名>:<本地分支名>**
+
+15.将远程主机origin的master分支拉取过来，与本地的brantest分支合并         git pull origin master:brantest
+
+16.将远程origin主机的master分支拉取过来和本地的当前分支进行合并           git pull origin master
+
+git pull = git fetch + git merge 																				git pull --rebase = git fetch + git rebase
+
+**一旦远程主机的版本库有了更新（Git术语叫做commit），需要将这些更新取回本地，这时就要用到git fetch命令。**
+
+17.将某个远程主机的更新，全部取回本地 	                        								   git fetch<远程主机名>
+
+18.如果只想取回特定分支的更新，可以指定分支名	 											git fetch<远程主机名><分支名>
+
+**远程操作的第一步，通常是从远程主机克隆一个版本库，这时就要用到git clone。**
+
+19.从远程主机克隆一个版本库	 																			git clone<版本库的网址>
+
+20.如果要指定不同的目录名，可以将目录名作为git clone命令的第二个参数	 git clone<版本库的网址><本地目录名>
+
+**为了便于管理，Git要求每个远程主机都必须指定一个主机名。git remote命令就用于管理主机名。**
+
+21.列出所有远程主机	 																							git remote
+
+22.查看远程主机的网址    																						 git remote -v
+
+**取回远程主机的更新以后，可以在他的基础上，使用git checkout命令创建一个新的分支。**
+
+23.在origin/master的基础上，创建一个新的分支												git checkout -b newBrach origin/master
+
+24.在本地分支上合并远程分支 																				git merge origin/master 																							git rebase origin/master
+
+**Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。**
+
+25.显示当前的Git配置
+git config --list
+
+26.编辑Git配置文件
+git config -e [--global]
+
+27.设置提交代码时的用户信息
+git config [--global] user.name "[name]"
+git config [--global] user.email "[email address]"
+
+28.删除工作区文件，并且将这次删除放入暂存区
+git rm [file1] [file2] ...
+
+**分支**
+
+29.列出所有本地分支
+git branch
+
+30.列出所有远程分支
+git branch -r
+
+31.列出所有本地分支和远程分支
+git branch -a
+
+**标签**
+
+32.列出所有tag
+git tag
+
+33.新建一个tag在当前commit
+git tag [tag]
+
+34.删除本地tag
+git tag -d [tag]
+
+35.删除远程tag
+git push origin :refs/tags/[tagName]
+
+36.查看tag信息
+git show [tag]
+
+37.提交所有tag
+git push [remote] --tags
+
+38.提交指定tag
+git push [remote] [tag]
+
+**查看信息**
+
+39.显示有变更的文件
+git status
+
+40.显示当前分支的版本历史
+git log
+
+41.搜索提交历史，根据关键词
+git log -S [keyword]
+
+42.显示今天你写了多少行代码
+git diff --shortstat "@{0 day ago}"
+
+**撤销**
+
+43.恢复暂存区的指定文件到工作区
+git checkout [file]
+
+44.恢复某个commit的指定文件到暂存区和工作区
+git checkout [commit] [file]
+
+45.恢复暂存区的所有文件到工作区
+git checkout .
+
+**其他**
+
+46.生成一个可供发布的压缩包
+git archive
 
 
 
-作业：
-把这个文件重新排版，需要有黑体，斜体，无序列表
+**由于家里实在太吵以及琐碎事物繁多，硅谷只看完第二季。并且没有看到什么技术错误。**
 
-课外作业：
 
-硅谷
 
-技术错误
