@@ -34,7 +34,7 @@ GitHub通常用于软件开发。GitHub还支持以下格式和功能：
 - 预览3D渲染文件。预览功能通过WebGL和Three.js实现。
 - 预览Adobe Photoshop的PSD文件，甚至可以比较同一文件的不同版本。
 
-##### Q: Git 是什么？
+##### Git 是什么？
 
 ###### 概念
 
