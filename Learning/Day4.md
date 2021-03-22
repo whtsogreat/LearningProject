@@ -369,3 +369,26 @@ B树的删除操作相对于插入操作是相对复杂一些的。
 ##### 系统的各种延时时间
 
 ![be8fadfe9942317e581a5158e31d0a2f0af.jpg](https://oscimg.oschina.net/oscnet/be8fadfe9942317e581a5158e31d0a2f0af.jpg)
+
+
+
+root
+
+131	132
+
+131	
+
+夏震
+
+
+
+
+
+root
+
+夏震	边大牛
+
+131		132
+
+
+
