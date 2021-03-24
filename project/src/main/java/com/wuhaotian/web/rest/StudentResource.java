@@ -1,10 +1,11 @@
 package com.wuhaotian.web.rest;
 
 import com.wuhaotian.domain.Student;
-import com.wuhaotian.domain.User;
 import com.wuhaotian.repository.StudentRepository;
 import com.wuhaotian.repository.UserRepository;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URISyntaxException;
 import java.util.List;
