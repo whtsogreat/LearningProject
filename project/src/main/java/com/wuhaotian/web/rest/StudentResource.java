@@ -1,5 +1,6 @@
 package com.wuhaotian.web.rest;
 
+import com.wuhaotian.domain.Student;
 import com.wuhaotian.domain.User;
 import com.wuhaotian.repository.StudentRepository;
 import com.wuhaotian.repository.UserRepository;
@@ -22,8 +23,8 @@ public class StudentResource {
     }
 
     @GetMapping("/all")
-    public List<User> getAllUser() throws URISyntaxException {
-        return userRepository.findAll();
+    public List<Student> getAllUser() throws URISyntaxException {
+        return studentRepository.findAll();
     }
 }
 
